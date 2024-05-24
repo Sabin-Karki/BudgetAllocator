@@ -23,4 +23,4 @@ A simple Java Swing application to help you manage your personal finances by cal
 
    ```bash
    git clone https://github.com/Sabin-Karki/BudgetAllocator.git
-   cd budget-allocator
+  
