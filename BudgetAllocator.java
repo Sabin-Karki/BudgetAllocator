@@ -57,6 +57,7 @@ public class BudgetAllocator extends JFrame {
         calculateButton.setBounds(10, 180, 160, 25);
         panel.add(calculateButton);
 
+
         saveButton = new JButton("Save Data");
         saveButton.setBounds(180, 180, 100, 25);
         panel.add(saveButton);
@@ -65,10 +66,17 @@ public class BudgetAllocator extends JFrame {
         loadButton.setBounds(290, 180, 100, 25);
         panel.add(loadButton);
 
+          JButton summaryButton = new JButton("Show Monthly Summary");
+        summaryButton.setBounds(400, 180, 170, 25);
+        panel.add(summaryButton);
+
+
         resultArea = new JTextArea();
-        resultArea.setBounds(10, 220, 460, 130);
+        resultArea.setBounds(10, 220, 460, 300);
         resultArea.setEditable(false);
         panel.add(resultArea);
+
+        
 
         calculateButton.addActionListener(new ActionListener() {
             @Override
@@ -91,7 +99,15 @@ public class BudgetAllocator extends JFrame {
             }
         });
 
-        add(panel);
+        summaryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showMonthlySummary();
+            }
+        });
+        
+
+         add(panel);
     }
 
     private void calculateBudget() {
@@ -123,6 +139,51 @@ public class BudgetAllocator extends JFrame {
             resultArea.setText("Please enter valid numbers for all fields.");
         }
     }
+    private void showMonthlySummary() {
+        try {
+            double income = Double.parseDouble(incomeField.getText());
+            double expenses = Double.parseDouble(expensesField.getText());
+            double savingsGoal = Double.parseDouble(savingsGoalField.getText());
+            double currentSavings = Double.parseDouble(currentSavingsField.getText());
+    
+            double remainingBudget = income - expenses;
+            double remainingToSave = savingsGoal - currentSavings;
+            double savingsPercentage = (currentSavings / savingsGoal) * 100;
+    
+            StringBuilder summary = new StringBuilder();
+            summary.append("Monthly Summary\n");
+            summary.append("--------------------\n");
+            summary.append("Total Income: $" + income + "\n");
+            summary.append("Total Expenses: $" + expenses + "\n");
+            summary.append("Remaining Budget: $" + remainingBudget + "\n");
+    
+            if (remainingBudget >= 0) {
+                summary.append("You're within your budget.\n");
+            } else {
+                summary.append("You've exceeded your budget. Consider reducing expenses.\n");
+            }
+    
+            summary.append("Total Savings Goal: $" + savingsGoal + "\n");
+            summary.append("Current Savings: $" + currentSavings + "\n");
+            summary.append("Remaining to Save: $" + remainingToSave + "\n");
+            summary.append("Savings Progress: " + String.format("%.2f", savingsPercentage) + "%\n");
+    
+            if (savingsPercentage >= 100) {
+                summary.append("Congratulations! You've reached your savings goal.\n");
+            } else if (savingsPercentage >= 75) {
+                summary.append("Great job! You're close to your savings goal.\n");
+            } else if (savingsPercentage >= 50) {
+                summary.append("Good progress. Keep saving!\n");
+            } else {
+                summary.append("Consider increasing your savings to reach your goal.\n");
+            }
+    
+            resultArea.setText(summary.toString());
+        } catch (NumberFormatException e) {
+            resultArea.setText("Please enter valid numbers for all fields.");
+        }
+    }
+    
 
     private void saveData() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("budget_data.txt"))) {
