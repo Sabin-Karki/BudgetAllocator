@@ -10,6 +10,8 @@ A simple Java Swing application to help you manage your personal finances by cal
 - **Current Savings**: Input your current savings.
 - **Budget Calculation**: Calculate and display the remaining budget and savings needed.
 - **Data Persistence**: Save and load your budget data to/from a file.
+
+
 -Click on the "Show Monthly Summary" button to generate the summary report.
   The summary report will be displayed in the text area below the input fields.
   
