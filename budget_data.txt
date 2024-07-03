@@ -1,4 +1,0 @@
-Income : 40000
-Expense : 20000
-Savings : 12000
-Current Savings : 5000
