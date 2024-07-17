@@ -70,6 +70,11 @@ public class BudgetAllocator extends JFrame {
         summaryButton.setBounds(400, 180, 170, 25);
         panel.add(summaryButton);
 
+        JButton percentageButton = new JButton("Calculate Expense Percentage");
+        percentageButton.setBounds(580, 180, 210, 25);
+        panel.add(percentageButton);
+
+
 
         resultArea = new JTextArea();
         resultArea.setBounds(10, 220, 460, 300);
@@ -103,6 +108,13 @@ public class BudgetAllocator extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 showMonthlySummary();
+            }
+        });
+
+        percentageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                displayExpensePercentage();
             }
         });
         
