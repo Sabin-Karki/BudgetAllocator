@@ -226,6 +226,22 @@ public class BudgetAllocator extends JFrame {
         }
         return (expenses / income) * 100.0;
     }
+     private void displayExpensePercentage() {
+        try {
+            double income = Double.parseDouble(incomeField.getText());
+            double expenses = Double.parseDouble(expensesField.getText());
+    
+            double expensePercentage = calculateExpensePercentage(income, expenses);
+    
+            String result = "Income: $" + income + "\n" +
+                            "Expenses: $" + expenses + "\n" +
+                            "Percentage of Income Spent on Expenses: " + String.format("%.2f", expensePercentage) + "%";
+    
+            resultArea.setText(result);
+        } catch (NumberFormatException e) {
+            resultArea.setText("Please enter valid numbers for Income and Expenses.");
+        }
+    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
