@@ -220,6 +220,12 @@ public class BudgetAllocator extends JFrame {
             JOptionPane.showMessageDialog(this, "Error loading data.");
         }
     }
+     private double calculateExpensePercentage(double income, double expenses) {
+        if (income == 0) {
+            return 0.0;
+        }
+        return (expenses / income) * 100.0;
+    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
